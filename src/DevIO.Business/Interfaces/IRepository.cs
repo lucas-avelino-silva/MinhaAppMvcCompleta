@@ -11,7 +11,7 @@ namespace DevIO.Business.Interfaces
     public interface IRepository<TEntity>: IDisposable where TEntity : Entity
     {
         /* Existe um método adicionar onde qualquer entidade que vai ser recebida como parametro desde que ela seja filha de Entity vai ser aceita.
-         quando só tem Task é um método voi, ou seja, não retorna nada.*/
+         quando só tem Task é um método void, ou seja, não retorna nada.*/
         Task Adicionar(TEntity entity);
 
         // Retorna um objeto da entidade

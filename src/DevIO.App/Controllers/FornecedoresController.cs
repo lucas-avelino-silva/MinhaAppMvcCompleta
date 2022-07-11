@@ -31,9 +31,10 @@ namespace DevIO.App.Controllers
         }
 
         // GET: Fornecedores/Details/5
-        public async Task<IActionResult> Details(Guid id)
+        public IActionResult Details(Guid id)
         {
-            var fornecedorViewModel = await ObterFornecedorEndereco(id);
+            //NAO ESTA MAIS ASSINCRONO ESSA ACTION
+            var fornecedorViewModel =  ObterFornecedorEndereco(id);
             if (fornecedorViewModel == null)
             {
                 return NotFound();
@@ -126,9 +127,19 @@ namespace DevIO.App.Controllers
             return RedirectToAction(nameof(Index));
         }
 
-        private async Task<FornecedorViewModel> ObterFornecedorEndereco(Guid id)
+        public async Task<IActionResult> AtualizarEndereco(Guid id)
         {
-            return _mapper.Map<FornecedorViewModel>(await _fornecedorRepository.ObterFornecedorEndereco(id));
+            FornecedorViewModel fornecedor = ObterFornecedorEndereco(id);
+
+            if(fornecedor == null) { return NotFound(); }
+
+            return PartialView("_AtualizarEndereco", new FornecedorViewModel { Endereco = fornecedor.Endereco });
+        }
+
+        public  FornecedorViewModel ObterFornecedorEndereco(Guid id)
+        {
+            var sss = _mapper.Map<FornecedorViewModel>( _fornecedorRepository.ObterFornecedorEndereco(id));
+            return sss;
         }
 
         private async Task<FornecedorViewModel> ObterFornecedorProdutosEndereco(Guid id)

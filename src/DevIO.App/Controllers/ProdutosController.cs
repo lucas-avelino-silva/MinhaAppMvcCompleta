@@ -29,7 +29,7 @@ namespace DevIO.App.Controllers
         // GET: Produtos
         public async Task<IActionResult> Index()
         {
-            return View(_map.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterProdutoFornecedores()));
+            return View(_map.Map<IEnumerable<ProdutoViewModel>>(await _produtoRepository.ObterTodos()));
         }
 
         // GET: Produtos/Details/5
